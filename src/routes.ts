@@ -1,26 +1,41 @@
 import { Router } from "express"
-import Tesseract from "tesseract.js"
-import { Request, Response } from "express"
+import { createWorker } from "tesseract.js"
+
+const multer = require('multer')
+const upload = multer({ dest: 'tmp/upload' })
 const routes = Router()
-
-
+const fs = require('fs')
 
 routes.get("/ping", (request, response) => {
   response.json("pingou")
 })
 
-routes.post("/image", (request: Request, response: Response) => {
-  const debug = false
+routes.post("/image", upload.single('image'), async (request, response) => {
+  const filepath = request.file.path
 
-  Tesseract.recognize(
-    'https://tesseract.projectnaptha.com/img/eng_bw.png',
-    'eng',   
-  ).then(({ data: { text } }) => {
-    response.json(text)
-  }).catch((error) => {
-    response.status(500).json(error)
-  })
+  try {
+    const worker = createWorker({
+      langPath: 'tmp/traineddata',
+      gzip:false
+    })
 
+    await worker.load()
+    await worker.loadLanguage('por')
+    await worker.initialize('por')
+    const { data: { text } } = await worker.recognize(filepath)
+    await worker.terminate()
+    
+    response.status(200).send(text)
+  } catch (error) {
+    response.status(400).json(error)
+  }
+  finally{
+    fs.unlink(filepath,(error) =>{
+      if(error)
+        console.error(error)
+    })  
+  }
+  
 })
 
 
