@@ -16,7 +16,7 @@ routes.post("/image", upload.single('image'), async (request, response) => {
   try {
     const worker = createWorker({
       langPath: 'tmp/traineddata',
-      gzip:false
+      gzip: false
     })
 
     await worker.load()
@@ -24,18 +24,22 @@ routes.post("/image", upload.single('image'), async (request, response) => {
     await worker.initialize('por')
     const { data: { text } } = await worker.recognize(filepath)
     await worker.terminate()
-    
-    response.status(200).send(text)
-  } catch (error) {
-    response.status(400).json(error)
-  }
-  finally{
-    fs.unlink(filepath,(error) =>{
-      if(error)
+
+    fs.unlink(filepath, (error) => {
+      if (error)
         console.error(error)
-    })  
+    })
+
+
+    return response.status(200).send(text)
+  } catch (error) {
+    fs.unlink(filepath, (error) => {
+      if (error)
+        console.error(error)
+    })
+    return response.status(400).json(error)
   }
-  
+
 })
 
 
