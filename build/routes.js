@@ -1,9 +1,9 @@
-import { Router } from "express"
-import { createWorker } from "tesseract.js"
+"use strict";Object.defineProperty(exports, "__esModule", {value: true});var _express = require('express');
+var _tesseractjs = require('tesseract.js');
 
 const multer = require('multer')
 const upload = multer({ dest: 'tmp/upload' })
-const routes = Router()
+const routes = _express.Router.call(void 0, )
 const fs = require('fs')
 
 routes.get("/ping", (request, response) => {
@@ -15,7 +15,7 @@ routes.post("/image", upload.single('image'), async (request, response) => {
 
   return response.send('aaaaa')
   try {
-    const worker = createWorker({
+    const worker = _tesseractjs.createWorker.call(void 0, {
       langPath: 'tmp/traineddata',
       gzip: false
     })
@@ -44,4 +44,4 @@ routes.post("/image", upload.single('image'), async (request, response) => {
 })
 
 
-export { routes }
+exports.routes = routes;
