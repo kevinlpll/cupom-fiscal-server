@@ -1,6 +1,9 @@
 {
   "scripts": {
     "dev": "ts-node-dev src/index.ts",
+    "compile": "tsc",
+    "transpile": "sucrase ./source -d ./build --transforms typescript,imports;",
+    "build": "sucrase ./source -d ./build --transforms typescript,imports",
     "start": "sucrase ./src -d ./build --transforms typescript,imports && node build/server.js"
   },
   "dependencies": {
