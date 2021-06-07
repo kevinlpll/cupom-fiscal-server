@@ -2,11 +2,12 @@
   "scripts": {
     "dev": "ts-node-dev src/index.ts",
     "compile": "tsc",
-    "transpile": "sucrase ./source -d ./build --transforms typescript,imports;",
-    "build": "sucrase ./source -d ./build --transforms typescript,imports",
+    "transpile": "sucrase ./src -d ./build --transforms typescript,imports;",
+    "build": "sucrase ./src -d ./build --transforms typescript,imports",
     "start": "sucrase ./src -d ./build --transforms typescript,imports && node build/server.js"
   },
   "dependencies": {
+    "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.11",
     "@types/multer": "^1.4.5",
     "@types/tesseract.js": "^0.0.2",
