@@ -13,7 +13,6 @@ routes.get("/ping", (request, response) => {
 routes.post("/image", upload.single('image'), async (request, response) => {
   const filepath = request.file.path
 
-  return response.send('aaaaa')
   try {
     const worker = createWorker({
       langPath: 'tmp/traineddata',
