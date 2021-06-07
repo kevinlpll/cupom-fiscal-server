@@ -1,7 +1,9 @@
 import express from "express"
 import { routes } from  "./routes"
-const cors = require("cors")
+import cors from "cors"
+
 const SERVER_PORT = 3333
+
 const app = express()
 
 app.use(cors())
