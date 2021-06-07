@@ -1,18 +1,19 @@
 import { Router } from "express"
 import { createWorker } from "tesseract.js"
 
-const multer = require('multer')
+import fs from 'fs'
+import multer from 'multer'
+
 const upload = multer({ dest: 'tmp/upload' })
 const routes = Router()
-const fs = require('fs')
 
 routes.get("/ping", (request, response) => {
-  response.json("pingou")
+  return response.json("pingou")
 })
 
 routes.post("/image", upload.single('image'), async (request, response) => {
-  const filepath = request.file.path
 
+  const filepath = request.file.path
   try {
     const worker = createWorker({
       langPath: 'tmp/traineddata',
