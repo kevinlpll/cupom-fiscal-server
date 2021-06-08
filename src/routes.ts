@@ -12,6 +12,7 @@ routes.get("/ping", (request, response) => {
 })
 
 routes.post("/image", upload.single('image'), async (request, response) => {
+  console.log(request.file)
 
   const filepath = request.file.path
   try {

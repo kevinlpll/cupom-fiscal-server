@@ -1,19 +1,20 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true});var _express = require('express');
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _express = require('express');
 var _tesseractjs = require('tesseract.js');
 
-const multer = require('multer')
-const upload = multer({ dest: 'tmp/upload' })
+var _fs = require('fs'); var _fs2 = _interopRequireDefault(_fs);
+var _multer = require('multer'); var _multer2 = _interopRequireDefault(_multer);
+
+const upload = _multer2.default.call(void 0, { dest: 'tmp/upload' })
 const routes = _express.Router.call(void 0, )
-const fs = require('fs')
 
 routes.get("/ping", (request, response) => {
-  response.json("pingou")
+  return response.json("pingou")
 })
 
 routes.post("/image", upload.single('image'), async (request, response) => {
-  const filepath = request.file.path
+  console.log(request)
 
-  return response.send('aaaaa')
+  const filepath = request.file.path
   try {
     const worker = _tesseractjs.createWorker.call(void 0, {
       langPath: 'tmp/traineddata',
@@ -26,7 +27,7 @@ routes.post("/image", upload.single('image'), async (request, response) => {
     const { data: { text } } = await worker.recognize(filepath)
     await worker.terminate()
 
-    fs.unlink(filepath, (error) => {
+    _fs2.default.unlink(filepath, (error) => {
       if (error)
         console.error(error)
     })
@@ -34,7 +35,7 @@ routes.post("/image", upload.single('image'), async (request, response) => {
 
     return response.status(200).send(text)
   } catch (error) {
-    fs.unlink(filepath, (error) => {
+    _fs2.default.unlink(filepath, (error) => {
       if (error)
         console.error(error)
     })
