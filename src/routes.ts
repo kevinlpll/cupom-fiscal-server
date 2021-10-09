@@ -1,48 +1,21 @@
-import { Router } from "express"
-import { createWorker } from "tesseract.js"
+import express from "express"
 
-import fs from 'fs'
-import multer from 'multer'
+import auth from './controllers/auth'
+import unauth from './controllers/unauth'
 
-const upload = multer({ dest: 'tmp/upload' })
-const routes = Router()
+const routes = express.Router()
 
-routes.get("/ping", (request, response) => {
-  return response.json("pingou")
-})
+const unauthRouter = express.Router()
+const authRouter = express.Router()
 
-routes.post("/image", upload.single('image'), async (request, response) => {
-  console.log(request.file)
+routes.use('/unauth', unauthRouter)
+routes.use('/auth', authRouter)
 
-  const filepath = request.file.path
-  try {
-    const worker = createWorker({
-      langPath: 'tmp/traineddata',
-      gzip: false
-    })
+/* UNAUTH */
+unauthRouter.use('/signup', unauth.SignupController)
+unauthRouter.use('/signin', unauth.SigninController)
 
-    await worker.load()
-    await worker.loadLanguage('por')
-    await worker.initialize('por')
-    const { data: { text } } = await worker.recognize(filepath)
-    await worker.terminate()
-
-    fs.unlink(filepath, (error) => {
-      if (error)
-        console.error(error)
-    })
-
-
-    return response.status(200).send(text)
-  } catch (error) {
-    fs.unlink(filepath, (error) => {
-      if (error)
-        console.error(error)
-    })
-    return response.status(400).json(error)
-  }
-
-})
-
+/* AUTH */
+authRouter.use('/ocr', auth.OcrController)
 
 export { routes }
