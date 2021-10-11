@@ -19,8 +19,8 @@ export default interface IUser extends Document {
     firstLogin?: Date,
     lastLogin?: Date
     lastLogout?: Date
-    loggedTime?: Number
+    loggedTime?: number
     lastLoginAttempt?: Date
-    loginAttempts?: Number
+    loginAttempts?: number
   }
 }

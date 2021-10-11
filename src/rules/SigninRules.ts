@@ -1,10 +1,11 @@
 import requestCheck from 'request-check'
 
-import validators from '../helpers/validators'
+import is              from '../helpers/is'
+import validators      from '../helpers/validators'
 import { CustomError } from '../helpers/error'
 
-const SignupRules = {
-  signup: (...args: any) => {
+const SigninRules = {
+  signin: (...args: any) => {
     const validator = requestCheck()
     validator.requiredMessage = 'Campo obrigatório!';
     (validator as any).useFieldNameAsKey = true
@@ -15,13 +16,8 @@ const SignupRules = {
     })
     
     validator.addRule('password', {
-      validator: (password: string) =>  validators.validateOWSPPassword(password),
-      message: `É obrigatório o uso de letra maiúscula, número, símbolo e no mínimo 8 letras!`
-    })
-
-    validator.addRule('confirmation', {
-      validator: ({ password, confirmation }) => String(password) === String(confirmation),
-      message: 'As senhas não coincidem!'
+      validator: (password: string) =>  is.string(password),
+      message: `Necessário informar uma senha!`
     })
 
     const invalid = validator.check(...args)
@@ -30,4 +26,4 @@ const SignupRules = {
   }
 }
 
-export default SignupRules
+export default SigninRules

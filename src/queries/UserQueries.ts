@@ -18,7 +18,7 @@ class UserQueries {
     return user
   }
 
-  async findOne(search) {
+  async findOne(search): Promise<IUser | undefined | null> {
     const [error, user] = await to(User.findOne(search).exec())
     if (error) {
       console.warn({ error })

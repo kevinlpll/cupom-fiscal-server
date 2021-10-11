@@ -14,6 +14,7 @@ routes.use('/auth', authRouter)
 /* UNAUTH */
 unauthRouter.use('/signup', unauth.SignupController)
 unauthRouter.use('/signin', unauth.SigninController)
+unauthRouter.use('/emails', unauth.EmailController)
 
 /* AUTH */
 authRouter.use('/ocr', auth.OcrController)
