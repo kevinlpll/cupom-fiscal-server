@@ -12,7 +12,7 @@ enum httpCodes {
   badGateway = 502
 }
 
-export const ResponseError = (response: Response, code: httpCodes, message: string, data: any) => {
+export const ResponseError = (response: Response, code: any, message: any, data: any) => {
   switch (code) {
     case 400:
       return response.send_badRequest(message, data)

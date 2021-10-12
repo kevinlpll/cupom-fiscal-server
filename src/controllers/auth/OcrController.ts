@@ -7,7 +7,7 @@ const upload = multer({ dest: 'tmp/upload' })
 
 const ocrController = Router()
 
-ocrController.post("/image", upload.single('image'), async (request, response) => {
+ocrController.post("/", upload.single('image'), async (request, response) => {
   console.log(request.file)
 
   const filepath = request.file.path
