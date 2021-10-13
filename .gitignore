@@ -1,5 +1,5 @@
 node_modules/
 temp/upload
 build/
-source/config/_localVars.ts
+src/config/_localVars.ts
 tmp/upload/

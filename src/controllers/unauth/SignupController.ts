@@ -20,7 +20,7 @@ SignupController.post('/', async (request: Request, response: Response) => {
 
     return response.send_ok('Cadastro realizado com sucesso!')
   } catch (error) {
-    return ResponseError(response, (error as any).code, (error as any).message, (error as any).data)
+    return ResponseError(response, error.code, error.message, error.data)
   }
 
 })

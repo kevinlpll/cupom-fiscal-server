@@ -24,10 +24,6 @@ const localVars = {
   DATABASE_PASSWORD: 'KYzYJEBsqZVdupPJ',
   DATABASE_CUSTERNAME: 'cluster0.t5exz',
 
-  // PAN
-  URL_PAN_API: 'https://api-hml.bancopan.com.br',
-  TOKEN_PAN_API: 'YThmNmZjNzQtZWY3MS00YTYxLTlmZDctMGM0ODI2YzRkZGFlOjkwMThhNDcwLTllYmQtNDBiOS04NjE4LWZhNjZkNTViMjY0Yg==',
-
   // ENV
   NAME: 'local',
   PORT: 5000,
