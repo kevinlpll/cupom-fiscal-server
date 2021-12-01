@@ -6,7 +6,11 @@ const {
   IP,
   AUTH_MASTER_PASSWORD,
   AUTH_ACCESS_TOKEN_EXPIRATION,
-  AUTH_REFRESH_TOKEN_EXPIRATION 
+  AUTH_REFRESH_TOKEN_EXPIRATION,
+  AWS_ACCESS_KEY_ID,
+  AWS_SECRET_ACCESS_KEY,
+  AWS_S3_BUCKET_NAME,
+  AWS_REGION, 
 } = require('./_variables')
 
 const globals = {
@@ -17,6 +21,10 @@ const globals = {
   AUTH_PRIVATE_KEY,
   NAME,
   PORT,
+  AWS_ACCESS_KEY_ID,
+  AWS_SECRET_ACCESS_KEY,
+  AWS_S3_BUCKET_NAME,
+  AWS_REGION,
   IP,
    _genders: ['female', 'male', 'other']
 }

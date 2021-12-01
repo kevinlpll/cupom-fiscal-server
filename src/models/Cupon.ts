@@ -10,6 +10,7 @@ const Schema = {
   number: Number,
   itemsQuantity: Number,
   store: String,
+  image: String,
   items: {
     type: [new mongoose.Schema({
       _id: ObjectId, 

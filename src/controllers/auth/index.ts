@@ -1,5 +1,9 @@
 import OcrController from './OcrController'
+import DashboardController from './DashboardController'
+import ItemsController from './ItemsController'
 
 export default {
-  OcrController
+  OcrController,
+  DashboardController,
+  ItemsController
 }

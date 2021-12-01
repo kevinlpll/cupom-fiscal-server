@@ -18,5 +18,7 @@ unauthRouter.use('/emails', unauth.EmailController)
 
 /* AUTH */
 authRouter.use('/ocr', auth.OcrController)
+authRouter.use('/dashboard', auth.DashboardController)
+authRouter.use('/items', auth.ItemsController)
 
 export { routes }
